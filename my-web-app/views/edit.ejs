@@ -1,0 +1,26 @@
+
+<head>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header>
+  <h1>Edit Post</h1>
+</header>
+<form action="/edit/<%= post.id %>" method="POST" enctype="multipart/form-data">
+  <label for="name">Name *</label>
+  <input type="text" id="name" name="name" value="<%= post.name %>" required>
+  <label for="description">Description *</label>
+  <textarea id="description" name="description" required><%= post.description %></textarea>
+  <label for="image">Image (Optional)</label>
+  <input type="file" id="image" name="image">
+  <% if (post.image) { %>
+    <div style="text-align:center;margin:1rem 0;">
+      <img src="/images/<%= post.image %>" alt="<%= post.name %>" style="max-width:200px;max-height:200px;box-shadow:0 2px 8px #b71c1c;border-radius:8px;" />
+    </div>
+  <% } %>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem;">
+    <a href="/" style="background:#222;color:#fff;padding:0.5rem 1rem;border-radius:6px;text-decoration:none;">Back to Posts</a>
+    <button type="submit">Update Post</button>
+  </div>
+</form>
+</body>

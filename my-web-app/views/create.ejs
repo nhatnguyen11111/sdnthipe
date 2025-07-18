@@ -1,0 +1,17 @@
+<head>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header>
+  <h1>Create New Post</h1>
+</header>
+<form action="/create" method="POST" enctype="multipart/form-data">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required><br>
+  <label for="description">Description:</label>
+  <textarea id="description" name="description" required></textarea><br>
+  <label for="image">Image (optional):</label>
+  <input type="file" id="image" name="image"><br>
+  <button type="submit">Create Post</button>
+</form>
+</body>

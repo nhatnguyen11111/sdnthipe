@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Post</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Edit Post</h1>
+            <a href="/" class="btn btn-secondary">Back to Posts</a>
+        </header>
+
+        <form id="editForm" class="post-form" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Name *</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description *</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Image (Optional)</label>
+                <input type="file" id="image" name="image" accept="image/*">
+                <div id="currentImage"></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Post</button>
+        </form>
+    </div>
+
+    <script>
+        const postId = window.location.pathname.split('/').pop();
+        
+        // Load post data
+        async function loadPost() {
+            try {
+                const response = await fetch(`/api/posts/${postId}`);
+                const post = await response.json();
+                
+                document.getElementById('name').value = post.name;
+                document.getElementById('description').value = post.description;
+                
+                if (post.image) {
+                    document.getElementById('currentImage').innerHTML = 
+                        `<img src="${post.image}" alt="Current image" style="max-width: 200px; margin-top: 10px;">`;
+                }
+            } catch (error) {
+                alert('Error loading post: ' + error.message);
+            }
+        }
+        
+        // Update post
+        document.getElementById('editForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            
+            try {
+                const response = await fetch(`/api/posts/${postId}`, {
+                    method: 'PUT',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    alert('Post updated successfully!');
+                    window.location.href = '/';
+                } else {
+                    const error = await response.json();
+                    alert('Error: ' + error.error);
+                }
+            } catch (error) {
+                alert('Error updating post: ' + error.message);
+            }
+        });
+        
+        loadPost();
+    </script>
+</body>
+</html>

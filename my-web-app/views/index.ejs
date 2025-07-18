@@ -1,0 +1,28 @@
+<head>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header>
+  <h1>Post List</h1>
+</header>
+<ul>
+  <% posts.forEach(post => { %>
+    <li>
+      <h2><%= post.name %></h2>
+      <p><%= post.description %></p>
+      <% if (post.image) { %>
+        <img src="/images/<%= post.image %>" alt="<%= post.name %>" />
+      <% } %>
+      <a href="/edit/<%= post.id %>">Edit</a>
+      <button onclick="confirmDelete('<%= post.id %>')">Delete</button>
+    </li>
+  <% }) %>
+</ul>
+<script>
+  function confirmDelete(id) {
+    if (confirm("Are you sure you want to delete this post?")) {
+      window.location.href = '/delete/' + id;
+    }
+  }
+</script>
+</body>

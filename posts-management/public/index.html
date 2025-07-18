@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Posts Management</h1>
+            <a href="/create" class="btn btn-primary">Create New Post</a>
+        </header>
+
+        <div class="search-section">
+            <input type="text" id="searchInput" placeholder="Search posts by name...">
+            <select id="sortSelect">
+                <option value="newest">Newest First</option>
+                <option value="name-asc">Name A-Z</option>
+                <option value="name-desc">Name Z-A</option>
+            </select>
+        </div>
+
+        <div id="postsContainer" class="posts-grid"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
